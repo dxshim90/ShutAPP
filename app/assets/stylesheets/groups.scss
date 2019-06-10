@@ -1,0 +1,58 @@
+// Place all the styles related to the Groups controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+p {
+  margin-bottom: 2px;
+}
+
+.container-messages {
+  margin-top: 25px;
+  display: flex;
+  width: 100%;
+}
+
+.sidebar {
+  padding: 1em;
+  width: 20%;
+  margin-right: 5px;
+}
+
+.send-group {
+  width: 75%;
+}
+
+.message-box {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 15px;
+  background-color: lavender;
+  height: 400px;
+  overflow: scroll;
+}
+
+%message {
+  padding: 5px 15px;
+  margin: 5px 0px;
+  word-break: break-word;
+  border-radius: 5px;
+}
+
+.message-right {
+  @extend %message;
+  text-align: right;
+  background-color: ghostwhite;
+  border: 1px solid blanchedalmond;
+}
+
+.message-left {
+  @extend %message;
+  text-align: left;
+  background-color: aliceblue;
+  border: 1px solid aqua;
+}
+
+.user-name {
+  color: blue;
+}

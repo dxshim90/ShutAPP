@@ -1,0 +1,58 @@
+<% if flash[:mess_error] %>
+  <h1> <%= flash[:mess_error] %> </h1>
+<% end %>
+
+<div id='username' style='display: none;'><%= current_user.nickname %></div>
+<div id='groupname' style='display: none;'><%= @group.name %></div>
+
+<div class="container-messages">
+
+  <div class="sidebar">
+    <% if flash[:success] %>
+      <div class="alert alert-success" role="alert">
+        <%= flash[:success] %>
+      </div>
+    <% end %>
+    <h4> <%= @group.name %> </h4>
+    <ul class="nav flex-column">
+      <% @group.users.each do |u| %>
+        <li>
+          <%= u.name %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="send-group">
+
+    <%= form_tag create_message_path  do %>
+      <input type="hidden" name='message[group_id]' value="<%= @group.id %>">
+      <input type="hidden" name='message[user_id]' value="<%= current_user.id %>">
+      <textarea maxlength="300" class="form-control" name='message[content]' placeholder="Type your message here..." rows="3"></textarea>
+      <button type="submit" class="btn btn-default">Send</button>
+    <% end %>
+
+    <div class="container-fluid message-box" id="real-time">
+      <% @group.messages.reverse.each do |m| %>
+          <% if m.user.id == current_user.id  %>
+            <div class="message-right">
+              <p class="user-name">
+                <%= m.user.nickname %>
+              </p>
+              <p><%= m.content %></p>
+            </div>
+          <% else %>
+            <div class="message-left">
+              <p class="user-name">
+                <%= m.user.nickname %>
+              </p>
+              <p><%= m.content %></p>
+            </div>
+          <% end %>
+      <% end %>
+    </div>
+
+    <%= link_to("Edit Group", edit_group_path) if @group.owner_id == current_user.id %>
+  </div>
+</div>
+

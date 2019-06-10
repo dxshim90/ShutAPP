@@ -1,0 +1,22 @@
+<% if flash.now[:danger]%>
+  <h1><%= flash.now[:danger] %></h1>
+<% end %>
+<% provide(:title, "Log in") %>
+
+<div class="login-form">
+  <h1>Log in</h1>
+  <div>
+    <%= form_for(:session, url: login_path) do |f| %>
+
+      <%= f.label :nickname %>
+      <%= f.text_field :nickname, class: 'form-control' %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.submit "Log in", class: "btn btn-primary" %>
+    <% end %>
+
+    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+  </div>
+</div>
